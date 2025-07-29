@@ -26,7 +26,7 @@ permissions:
 
 jobs:
   build-apk:
-    runs-on: home-mac-machine
+    runs-on: [self-hosted, macos]
     environment: ${{ inputs.environment }}
     steps:
       - name: Print Input Values
@@ -72,7 +72,7 @@ jobs:
   
   deploy-apk:
     needs: build-apk
-    runs-on: amigoapp
+    runs-on: [self-hosted, macos]
     # environment: ${{ github.ref_name }}
     environment: ${{ inputs.environment }}
     steps:
