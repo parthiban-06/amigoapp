@@ -26,7 +26,7 @@ permissions:
 
 jobs:
   build-apk:
-    runs-on: [self-hosted, macos]
+    runs-on: personal-runner
     environment: ${{ inputs.environment }}
     steps:
       - name: Print Input Values
@@ -72,7 +72,7 @@ jobs:
   
   deploy-apk:
     needs: build-apk
-    runs-on: [self-hosted, macos]
+    runs-on: personal-runner
     # environment: ${{ github.ref_name }}
     environment: ${{ inputs.environment }}
     steps:
