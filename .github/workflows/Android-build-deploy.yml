@@ -69,3 +69,26 @@ jobs:
         with:
           name: app-${{ inputs.environment }}-release.${{ inputs.version }}(${{ inputs.build_number }}).apk
           path: build/app/outputs/flutter-apk/app-${{ inputs.environment }}-release.${{ inputs.version }}(${{ inputs.build_number }}).apk
+  
+  deploy-apk:
+    needs: build-apk
+    runs-on: amigoapp
+    # environment: ${{ github.ref_name }}
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: apk-build
+          path: build/app/outputs/flutter-apk/
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION_NAME }}
+
+      - name: Deploy to qa Environment
+        run: |
+          aws s3 sync build/app/outputs/flutter-apk/ s3://${{ vars.apk_S3_BUCKET }} --delete || exit 1 
+          echo "Deployed Successfully on ${{ vars.apk_S3_BUCKET }}"
