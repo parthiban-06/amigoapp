@@ -1,0 +1,12 @@
+# Test coverage configuration
+coverage:
+  exclude:
+    - "lib/generated/**"
+    - "lib/**/*.g.dart"
+    - "lib/**/*.freezed.dart"
+    - "lib/**/*.mocks.dart"
+    - "lib/main.dart"
+  include:
+    - "lib/features/itinerary/providers/**"
+    - "lib/features/itinerary/models/**"
+    - "lib/features/itinerary/repo/**"

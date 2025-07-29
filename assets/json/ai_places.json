@@ -1,0 +1,34 @@
+{
+  "places": [
+    {
+      "internationalPhoneNumber": "+1 604-685-1301",
+      "formattedAddress": "1431 Robson St #1, Vancouver, BC V6G 1C1, Canada",
+      "googleMapsUri": "https://maps.google.com/?cid=9367588246078635186",
+      "websiteUri": "https://divyasutravancouver.com/",
+      "displayName": {
+        "text": "Divya Sutra Suites on Robson Downtown Vancouver",
+        "languageCode": "en"
+      }
+    },
+    {
+      "internationalPhoneNumber": "+1 604-682-5555",
+      "formattedAddress": "773 Beatty St, Vancouver, BC V6B 2M4, Canada",
+      "googleMapsUri": "https://maps.google.com/?cid=5794041528004570396",
+      "websiteUri": "https://www.georgiancourthotelvancouver.com/",
+      "displayName": {
+        "text": "Georgian Court Hotel, WorldHotels Elite",
+        "languageCode": "en"
+      }
+    },
+    {
+      "internationalPhoneNumber": "+1 604-602-1008",
+      "formattedAddress": "111 Robson St, Vancouver, BC V6B 2A8, Canada",
+      "googleMapsUri": "https://maps.google.com/?cid=2062660745266402652",
+      "websiteUri": "https://www.hilton.com/en/hotels/yvrhshx-hampton-suites-vancouver-downtown/?SEO_id=GMB-HX-YVRHSHX",
+      "displayName": {
+        "text": "Hampton Inn & Suites by Hilton Vancouver-Downtown",
+        "languageCode": "en"
+      }
+    }
+  ]
+}

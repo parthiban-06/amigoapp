@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "attraction": "Amazing Attractions",
+    "isSelect": false
+  },
+  {
+    "id": 2,
+    "attraction": "Mesmerizing Menus",
+    "isSelect": false
+  },
+  {
+    "id": 3,
+    "attraction": "Local Lore",
+    "isSelect": false
+  },
+  {
+    "id": 4,
+    "attraction": "Remarkable Relaxation",
+    "isSelect": false
+  },
+  {
+    "id": 5,
+    "attraction": "Leave me alone",
+    "isSelect": false
+  },
+  {
+    "id": 6,
+    "attraction": "Dancing 'til Dawn",
+    "isSelect": false
+  }
+]

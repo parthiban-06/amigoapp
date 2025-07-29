@@ -1,0 +1,36 @@
+name: SonarCloud
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sonarqube:
+    name: SonarQube
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Flutter SDK
+        uses: flutter-actions/setup-flutter@v4
+        with:
+          channel: stable
+          version: 3.29.3
+          cache: true
+          cache-sdk: true
+          cache-key: flutter-3.27.1
+
+      - name: Build
+        run: |
+          flutter clean
+          flutter pub get
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

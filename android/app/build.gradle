@@ -1,0 +1,133 @@
+plugins {
+    id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
+    // END: FlutterFire Configuration
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+   
+}
+
+android {
+    namespace = "com.visa.eva"
+    compileSdk = 35
+    ndkVersion = "27.0.12077973"
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.visa.eva"
+        minSdkVersion = 29
+        targetSdk = 34
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+        }
+    }
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            dimension "default"
+//            applicationIdSuffix ".dev"
+//            versionNameSuffix "-dev"
+            manifestPlaceholders = [appName: "Visa Go",]
+        }
+        prod {
+            dimension "default"
+            manifestPlaceholders = [appName: "Visa Go",]
+        }
+
+        qa {
+            dimension "default"
+            manifestPlaceholders = [appName: "Visa Go",]
+        }
+    }
+
+
+    signingConfigs {
+        debugSign {
+            storeFile file("../VisaAmigo.jsk")
+            keyAlias 'VisaAmigo'
+            storePassword 'Amigo@123'
+            keyPassword 'Amigo@123'
+        }
+
+        releaseSign {
+            storeFile file("../VisaAmigo.jsk")
+            keyAlias 'VisaAmigo'
+            storePassword 'Amigo@123'
+            keyPassword 'Amigo@123'
+        }
+
+    }
+
+    buildTypes {
+
+        debug {
+            signingConfig = signingConfigs.debugSign
+            manifestPlaceholders = [enableCrashReporting: "false"]
+        }
+
+        release {
+            signingConfig = signingConfigs.releaseSign
+            manifestPlaceholders = [enableCrashReporting: "true",]
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            pseudoLocalesEnabled false
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // Additional anti-reverse engineering measures
+            ndk {
+                debugSymbolLevel 'NONE'
+            }
+
+            // Disable all debugging information
+            buildConfigField "boolean", "DEBUG", "false"
+            buildConfigField "String", "BUILD_TYPE", "\"release\""
+
+            // Remove all debug information from native libraries
+            packagingOptions {
+                jniLibs {
+                    useLegacyPackaging false
+                }
+            }
+        }
+
+
+    }
+
+    dependencies {
+        implementation platform('com.google.firebase:firebase-bom:32.0.0') // Latest Firebase BOM
+        implementation 'com.google.firebase:firebase-crashlytics'
+        coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+        implementation 'com.google.firebase:firebase-analytics:21.5.0'// update due to crash issue
+// implementation 'com.google.android.gms:play-services-base:18.4.0'
+
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+// This must appear at the bottom of the file
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'

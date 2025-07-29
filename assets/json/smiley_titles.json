@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "title": "slightly_excited",
+    "point": 0.0,
+    "isSelect": false
+  },
+  {
+    "id": 1,
+    "title": "looking_forward_to_it",
+    "point": 0.178,
+    "isSelect": false
+  },
+  {
+    "id": 2,
+    "title": "pretty_pumped",
+    "point": 0.305,
+    "isSelect": false
+  },
+  {
+    "id": 3,
+    "title": "super_excited",
+    "point": 0.455,
+    "isSelect": false
+  },
+  {
+    "id": 4,
+    "title": "completely_thrilled",
+    "point": 0.599,
+    "isSelect": false
+  },
+  {
+    "id": 5,
+    "title": "i_cant_wait",
+    "point": 0.711,
+    "isSelect": false
+  },
+  {
+    "id": 6,
+    "title": "absolutely_ecstatic",
+    "point": 0.861,
+    "isSelect": false
+  },
+  {
+    "id": 7,
+    "title": "its_all_ive_been_thinking_about",
+    "point": 1.0,
+    "isSelect": false
+  }
+]

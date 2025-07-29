@@ -1,0 +1,39 @@
+# Generated files
+lib/generated/
+lib/generated/l10n.dart
+lib/generated/assets.dart
+lib/generated/intl/
+
+# Build artifacts
+build/
+.dart_tool/
+coverage/
+
+# Generated Dart files
+**/*.g.dart
+**/*.freezed.dart
+**/*.mocks.dart
+**/*.config.dart
+**/*.gr.dart
+**/*.chopper.dart
+**/*.l10n.dart
+
+# Test files
+test/
+**/*_test.dart
+**/*.test.dart
+
+# IDE and system files
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+
+# Dependencies
+.packages
+pubspec.lock
+
+# Flutter specific
+.flutter-plugins
+.flutter-plugins-dependencies 

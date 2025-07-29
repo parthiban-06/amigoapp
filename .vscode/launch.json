@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      
+
+      {
+        "name": "Flutter Dev",
+        "request": "launch",
+        "type": "dart",
+        "program": "lib/main_dev.dart",
+        "args": ["--flavor", "dev"]
+      },
+      {
+        "name": "Flutter Qa",
+        "request": "launch",
+        "type": "dart",
+        "program": "lib/main_qa.dart",
+        "args": ["--flavor", "qa"]
+      },
+      {
+        "name": "Flutter Prod",
+        "request": "launch",
+        "type": "dart",
+        "program": "lib/main_prod.dart",
+        "args": ["--flavor", "prod"]
+      }
+    ]
+  }

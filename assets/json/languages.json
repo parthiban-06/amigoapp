@@ -1,0 +1,83 @@
+[
+  {
+    "title": "English",
+    "langText": "Hello",
+    "langCode": "en",
+    "select_lang_text": "Select Language",
+    "change_lang_text": "Change Language",
+    "btn_continue": "Continue",
+    "btn_update": "Update"
+  },
+  {
+    "title": "español",
+    "langText": "Hola",
+    "langCode": "es",
+    "select_lang_text": "Seleccionar Idioma",
+    "change_lang_text": "Cambiar Idioma",
+    "btn_continue": "Continuar",
+    "btn_update": "Actualizar"
+  },
+  {
+    "title": "português",
+    "langText": "Olá",
+    "langCode": "pt",
+    "select_lang_text": "Selecionar Idioma",
+    "change_lang_text": "Alterar Idioma",
+    "btn_continue": "Continuar",
+    "btn_update": "Atualizar"
+  },
+  {
+    "title": "Français",
+    "langText": "Bonjour",
+    "langCode": "fr",
+    "select_lang_text": "Sélectionner la Langue",
+    "change_lang_text": "Changer de Langue",
+    "btn_continue": "Continuer",
+    "btn_update": "Mettre à Jour"
+  },
+  {
+    "title": "Deutsch",
+    "langText": "Hallo",
+    "langCode": "de",
+    "select_lang_text": "Sprache Auswählen",
+    "change_lang_text": "Sprache Ändern",
+    "btn_continue": "Weiter",
+    "btn_update": "Aktualisieren"
+  },
+  {
+    "title": "عربي",
+    "langText": "مرحبا",
+    "langCode": "ar",
+    "select_lang_text": "اختر اللغة",
+    "change_lang_text": "تغيير اللغة",
+    "btn_continue": "متابعة",
+    "btn_update": "تحديث"
+  },
+  {
+    "title": "中国人",
+    "langText": "你好",
+    "langCode": "zh",
+    "select_lang_text": "选择语言",
+    "change_lang_text": "更改语言",
+    "btn_continue": "继续",
+    "btn_update": "更新"
+  },
+  {
+    "title": "日本語",
+    "langText": "こんにちは",
+    "langCode": "ja",
+    "select_lang_text": "言語を選択",
+    "change_lang_text": "言語を変更",
+    "btn_continue": "続行",
+    "btn_update": "更新"
+  },
+  {
+    "title": "한국인",
+    "langText": "안녕하세요",
+    "langCode": "ko",
+    "select_lang_text": "언어 선택",
+    "change_lang_text": "언어 변경",
+    "btn_continue": "계속",
+    "btn_update": "업데이트"
+  }
+]

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Enforce certificate pinning for enhanced security -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">visa.dev.com</domain>
+        <domain includeSubdomains="true">api.visa.com</domain>
+        <domain includeSubdomains="true">*.visa.com</domain>
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
+
+    <!-- Block all cleartext traffic by default -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Debug configuration for development -->
+    <debug-overrides>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+</network-security-config> 

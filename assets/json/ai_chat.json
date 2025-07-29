@@ -1,0 +1,107 @@
+{
+  "status": 200,
+  "data":[
+    {
+      "formattedAddress": "367 Pitt St, Sydney NSW 2000, Australia",
+      "displayName": "Mother Chu's Vegetarian Kitchen",
+      "photos": [
+        {
+          "name": "places/ChIJwWB_qT2uEmsRbE92vXMyX4Q/photos/AXCi2Q7-Ab38Xpl_sJkvVzJLrcuzBk7IiN4niOl-3d6Ve_Zv9QFSoHczQS26Yk_-xcL7ETcqeX6A1HQ6SzKsCEr9Z0iM0_KQ1yW3JOqiU70we2ifCPfiLgzl4t8blOE7Jpk_3mzJ7EYao0LfWvmk5MHDHhUtCBlNTQCoxVe_",
+          "authorAttributions": [
+            {
+              "displayName": "Casa Daisy",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUCgACsL5meVz9SZTtTksWxagxObuOk8ZpXIwWsXBKPPG0cY8U6IA=s100-p-k-no-mo"
+            }
+          ]
+        },
+        {
+          "name": "places/ChIJwWB_qT2uEmsRbE92vXMyX4Q/photos/AXCi2Q54ruyL7xC8oykwqkc4gyUdCpMYayDABgZEJbxqKWCDvvLcgQ3849swwKtvWDR8qrzfcWWdlXM5yLNPI0ue9ClrH7nDiwNM86MagxcBcQxxPzNyW10ra7utPmUZBgDIvkDwaIaX3bAmwYvBYB2ov1t5AvIRhmnvCWNf",
+          "authorAttributions": [
+            {
+              "displayName": "Google Reviewer",
+              "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJ8oa2-9_EbKC-MDHL1NEiXV1nWAySTeaFbv2X_BzgoT8F1Qw=s100-p-k-no-mo"
+            }
+          ]
+        },
+        {
+          "name": "places/ChIJwWB_qT2uEmsRbE92vXMyX4Q/photos/AXCi2Q4krtJBB0rTfXisa_aJLhjLEJ2HryTPXU2BobT043L6riNQ7W92qAAqoDEpJM-7SvEQF2izgXIFMafhWFZwbInxgRVoeNxH9L15U1aH8My7CoRxSl-wlgg-fXncuVV5wQqf04nf43g8t1dv76ijhr1lMw7MLadS_6RL",
+          "authorAttributions": [
+            {
+              "displayName": "Parth Bommakanti",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWrJaFzaXbEh11V6IGu6oAukgh-DfaTXNOxtTUemECoXI8AH0k=s100-p-k-no-mo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "formattedAddress": "29 King St, Sydney NSW 2000, Australia",
+      "displayName": "Peace Harmony",
+      "photos": [
+        {
+          "name": "places/ChIJs5ydyTiuEmsR0fRSlU0C7k0/photos/AXCi2Q4CHAdCrLJCtenk4OkofdDZzFOI2m3mQx5o3PyIXZscfNnmCn9ydo4mXkBy2odOyzpYEz4gZ3bIJeI7xFsyoxtJH3oenz_0cKN-mR-oXD709eEHNxho96CvUPuy4ynVpXbRMqUNrG5xvmKhkAjUKmLFwaLBZfddzUQv",
+          "authorAttributions": [
+            {
+              "displayName": "sarita iyengar",
+              "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocL-tlbxMisa3MIvCNYdURanzNURjEEnZfDlWW2QuIAMoXD0tw=s100-p-k-no-mo"
+            }
+          ]
+        },
+        {
+          "name": "places/ChIJs5ydyTiuEmsR0fRSlU0C7k0/photos/AXCi2Q4PHe6pvqtkBuo2_SeweQWSbZyKSjZxKw8GDJ1ZxcHZ_XA2J4BvjCZlXIiB99WftXDFhTvHOkw0h2APdA2O7QSSmPz1cbqvTW37_YiLildFrTdHGV2I4pmMzua0EUQWM8Ny32R2SWMPnWiuj4UF1Ko-YzVFfFOR8qS_",
+          "authorAttributions": [
+            {
+              "displayName": "tastysydney",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUDS7bvO1t4qSGCiC-d1_ssxh8uL8ud4SySkTQd-CwKQvPo8_Hz=s100-p-k-no-mo"
+            }
+          ]
+        },
+        {
+          "name": "places/ChIJs5ydyTiuEmsR0fRSlU0C7k0/photos/AXCi2Q6fZlZ2NJHMjUJpO17HGj0IDMSYfaH8gsvIL67T2oY8Hqhz2NDx2kA_6z0Zwu4aUMpcLhU9J-I-UqsocJMQJL_6T3sXZ0386RfZQaeJLeteLmYTW8XPfCSwnbdjkuwu2gV10V59icGptQ9Tt96wbIzZoitTYEyfWl1I",
+          "authorAttributions": [
+            {
+              "displayName": "tastysydney",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUDS7bvO1t4qSGCiC-d1_ssxh8uL8ud4SySkTQd-CwKQvPo8_Hz=s100-p-k-no-mo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "formattedAddress": "The Quay Building, 2 Phillip St, Sydney NSW 2000, Australia",
+      "displayName": "The Spice Room",
+      "photos": [
+        {
+          "name": "places/ChIJE18nTWiuEmsRUz-zCmu8p8U/photos/AXCi2Q79ZrOnrYgwnMiJv9-YIWDDS8VlutgnwGqwg02pePhdecqr-u6u4p1n-mtr0oHuCc1OfUN7Q2SRF95oqQVdDOGVu_Zh2_X_S1nU7jVE-rD46o_A8lz6lrlELntjo9gyTqmz_D7Hz3WVTMweADc42xSvGaDcQXpN3P1v",
+          "authorAttributions": [
+            {
+              "displayName": "The Spice Room",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVEjApnNsdZM5_tE98YZp6SVN-h3e_jHPNSnY4K5VmIu554Xh4=s100-p-k-no-mo"
+            }
+          ]
+        },
+        {
+          "name": "places/ChIJE18nTWiuEmsRUz-zCmu8p8U/photos/AXCi2Q4A-V6m3-FltbBGUmRwd54tdT2b3l9IbcdJcA424TE8qEG5VODV8gca2Tv0o_iBTln0ZQC__QlYq0nXNy5A9dv_5uemcKtFlD7gQthB4Go9KXGHa2qpt_6l2o7FpN0KD-F5e-BgQ_-KbTVNv5kj-HeO1D04y7mLq0w",
+          "authorAttributions": [
+            {
+              "displayName": "So M",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVBYskMJdpZlkeBmEbtSh5Wtoe2yXCwRABVg48vM4OlBy0bXtg=s100-p-k-no-mo"
+            }
+          ]
+        },
+        {
+          "name": "places/ChIJE18nTWiuEmsRUz-zCmu8p8U/photos/AXCi2Q5A7XHFH_pbHcRDreHRpzHWCcVX4Zy_RcxlTSG_BbYyplDK0Q5awrOMglUsc57134ntbMDdhoLl-Qq22eyA5ID4AmHzVvMkiFuFq-YFu8NO6eGeH5ZgTbYJvjSkx9g43BFbqWhEvm4Hoo1OlCPkPzKcOpX03etRMpdp",
+          "authorAttributions": [
+            {
+              "displayName": "今村友美（toni）",
+              "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocKpzUQ8l7OB5ydTAsY5IhExjJWU09rpbK73bMk70KhBOYWphw=s100-p-k-no-mo"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "message": "ChatModel"
+}
+
+

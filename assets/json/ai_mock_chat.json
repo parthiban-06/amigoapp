@@ -1,0 +1,231 @@
+{
+  "initial_questions": [
+    {
+      "id": "q1",
+      "text": "What can I help you with today?",
+      "choices": [
+        {
+          "id": "c1",
+          "text": "Learn about your services"
+        },
+        {
+          "id": "c2",
+          "text": "Ask about pricing"
+        },
+        {
+          "id": "c3",
+          "text": "Need technical support"
+        },
+        {
+          "id": "c28",
+          "text": "Check temperature"
+        }
+      ]
+    }
+  ],
+  "responses": [
+    {
+      "choice_id": "c1",
+      "response_text": "Sure! We offer various services like web development, mobile app development, and AI solutions. Would you like to know more about any specific service?",
+      "follow_up_questions": [
+        {
+          "id": "q2",
+          "text": "Which service would you like to learn about?",
+          "choices": [
+            {
+              "id": "c4",
+              "text": "Web Development"
+            },
+            {
+              "id": "c5",
+              "text": "Mobile App Development"
+            },
+            {
+              "id": "c6",
+              "text": "AI Solutions"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choice_id": "c2",
+      "response_text": "Our pricing varies depending on the service and project scope. Could you specify the service you are interested in?",
+      "follow_up_questions": [
+        {
+          "id": "q3",
+          "text": "Which service are you interested in?",
+          "choices": [
+            {
+              "id": "c7",
+              "text": "Web Development"
+            },
+            {
+              "id": "c8",
+              "text": "Mobile App Development"
+            },
+            {
+              "id": "c9",
+              "text": "AI Solutions"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choice_id": "c3",
+      "response_text": "I’m here to assist you. Could you describe the issue you’re facing?",
+      "follow_up_questions": [
+        {
+          "id": "q10",
+          "text": "What issue are you experiencing?",
+          "choices": [
+            {
+              "id": "c10",
+              "text": "Login Issues"
+            },
+            {
+              "id": "c11",
+              "text": "Performance Problems"
+            },
+            {
+              "id": "c12",
+              "text": "Feature Request"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choice_id": "c28",
+      "response_text": "Here is the weather report for today:",
+      "dynamic_response": {
+        "temperature": {
+          "unit": "Celsius",
+          "value": "32"
+        },
+        "conditions": "Clear",
+        "humidity": "80%",
+        "wind_speed": "3 mph",
+        "date": "Monday, 20th Feb"
+      },
+      "follow_up_questions": [
+        {
+          "id": "q17",
+          "text": "Would you like a 7-day forecast?",
+          "choices": [
+            {
+              "id": "c29",
+              "text": "Yes, show the forecast"
+            },
+            {
+              "id": "c30",
+              "text": "No, just today’s weather"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choice_id": "c29",
+      "response_text": "Here is the 7-day weather forecast:",
+      "dynamic_response": {
+        "location": "Chandigarh, India",
+        "forecast": [
+          {
+            "day": "Thursday",
+            "temperature": {
+              "high": 25,
+              "low": 10
+            },
+            "condition": "Clear"
+          },
+          {
+            "day": "Friday",
+            "temperature": {
+              "high": 25,
+              "low": 11
+            },
+            "condition": "Clear"
+          },
+          {
+            "day": "Saturday",
+            "temperature": {
+              "high": 24,
+              "low": 11
+            },
+            "condition": "Clear"
+          },
+          {
+            "day": "Sunday",
+            "temperature": {
+              "high": 26,
+              "low": 10
+            },
+            "condition": "Clear"
+          },
+          {
+            "day": "Monday",
+            "temperature": {
+              "high": 28,
+              "low": 15
+            },
+            "condition": "Cloud"
+          },
+          {
+            "day": "Tuesday",
+            "temperature": {
+              "high": 20,
+              "low": 11
+            },
+            "condition": "Rain"
+          },
+          {
+            "day": "Wednesday",
+            "temperature": {
+              "high": 25,
+              "low": 13
+            },
+            "condition": "Clear"
+          }
+        ]
+      },
+      "follow_up_questions": [
+        {
+          "id": "q31",
+          "text": "Would you like to set up weather alerts?",
+          "choices": [
+            {
+              "id": "c31",
+              "text": "Yes, set up alerts"
+            },
+            {
+              "id": "c32",
+              "text": "No, just the forecast"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choice_id": "c4",
+      "response_text": "Our web development service includes building responsive and dynamic websites tailored to your needs. Do you have any specific requirements?",
+      "follow_up_questions": [
+        {
+          "id": "q11",
+          "text": "Do you need e-commerce features?",
+          "choices": [
+            {
+              "id": "c13",
+              "text": "Yes, I need e-commerce features"
+            },
+            {
+              "id": "c14",
+              "text": "No, I only need informational pages"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

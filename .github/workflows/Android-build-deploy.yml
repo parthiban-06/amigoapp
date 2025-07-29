@@ -1,0 +1,71 @@
+name: Amigoapp-ANDROID-Build-Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number (e.g., 1.1.0)'
+        required: true
+        type: string
+      build_number:
+        description: 'Build number (e.g., 150)'
+        required: true
+        type: string
+      environment:
+        description: 'Environment to deploy (e.g., dev, qa, uat)'
+        required: true
+        type: choice
+        options:
+          - dev
+          - qa
+          - uat
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-apk:
+    runs-on: amigoapp
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Print Input Values
+        run: |
+          echo "Version: ${{ inputs.version }}"
+          echo "Build Number: ${{ inputs.build_number }}"
+          echo "Environment: ${{ inputs.environment }}"
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION_NAME }}
+
+      - name: Setup ${{ inputs.environment }} config ".env" from Secrets Manager 
+        run: |
+          mkdir -p config/dev config/visa_dev config/qa config/prod config/uat 
+          aws secretsmanager get-secret-value \
+            --secret-id ${{ vars.SECRET_NAME }} \
+            --query SecretString \
+            --output text | jq -r 'to_entries | map("\(.key)=\(.value|tostring)") | .[]' > config/dev/.env
+          cp config/dev/.env config/qa/ 
+          cp config/dev/.env config/prod/
+          cp config/dev/.env config/uat/
+          cp config/dev/.env config/visa_dev/
+      
+      - name: Build APK for ${{ inputs.environment }} Environment
+        run: |
+          export PATH="/Users/parthiban/fvm/default/bin:$PATH"
+          flutter clean
+          flutter pub get
+          dart run intl_utils:generate
+          flutter build apk --flavor ${{ vars.DART_FLAVOUR }} --release -t lib/${{ vars.DART_FILE }}
+          
+      - name: Upload apk Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-${{ inputs.environment }}-release.${{ inputs.version }}(${{ inputs.build_number }}).apk
+          path: build/app/outputs/flutter-apk/app-${{ inputs.environment }}-release.${{ inputs.version }}(${{ inputs.build_number }}).apk

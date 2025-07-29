@@ -1,0 +1,85 @@
+name: Amigoapp-WEB-Build-Deploy
+
+on:
+  push:
+    branches:
+      - dev
+      - qa
+      - uat
+
+concurrency:
+  group: web-deploy-${{ github.workflow }}
+  cancel-in-progress: false
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-web:
+    runs-on: amigoapp 
+    environment: ${{ github.ref_name }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION_NAME }}
+
+      - name: Setup ${{ github.ref_name }} config ".env" from Secrets Manager 
+        run: |
+          mkdir -p config/dev config/visa_dev config/qa config/prod config/uat 
+          aws secretsmanager get-secret-value \
+            --secret-id ${{ vars.SECRET_NAME }} \
+            --query SecretString \
+            --output text | jq -r 'to_entries | map("\(.key)=\(.value|tostring)") | .[]' > config/dev/.env
+          cp config/dev/.env config/qa/ 
+          cp config/dev/.env config/prod/
+          cp config/dev/.env config/uat/
+          cp config/dev/.env config/visa_dev/
+
+      - name: Build WEB for ${{ github.ref_name }} Environment
+        run: |
+          export PATH="/Users/parthiban/fvm/default/bin:$PATH"
+          flutter clean
+          flutter pub get
+          dart run intl_utils:generate
+          flutter build web -t lib/${{ vars.DART_FILE }} --dart-define=FLAVOR=${{ vars.DART_FLAVOUR }}
+          
+      - name: Upload Web Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: build/web
+
+  deploy-web:
+    needs: build-web
+    runs-on: amigoapp
+    environment: ${{ github.ref_name }}
+
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: web-build
+          path: build/web
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION_NAME }}
+
+      - name: Deploy to ${{ github.ref_name }} Environment
+        run: |
+          aws s3 sync build/web s3://${{ vars.S3_BUCKET }} --delete || exit 1 
+          echo "Deployed Successfully on ${{ vars.S3_BUCKET }}"
+
+      - name: Invalidate ${{ github.ref_name }} CloudFront
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ vars.DISTRIBUTION_ID }} --paths "/*"
+          echo "invalidation cleared on ${{ github.ref_name }}"

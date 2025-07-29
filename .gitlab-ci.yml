@@ -1,0 +1,396 @@
+stages:
+  - analysis
+  - build
+  - deploy
+
+# spec:
+#   inputs:
+#     environment:
+#       description: "Deployment environment"
+#       options: ["qa", "dev"]  # Only allow these values
+#       default: "dev"          # Default to dev if not scified
+#     app_version:
+#       description: "Application version (semver format)"
+#       regex: ^\d+\.\d+\.\d+$  # Must match X.Y.Z format
+#     build_number:
+#       description: "Build number"
+#       type: number
+
+variables:
+  APP_VERSION:
+    description: "Please enter the app-version [EXAMPLE: 1.2.3] "
+  BUILD_NUMBER:
+    description: "Please enter the Build Number(0 to 99) [Example: 99]"
+  ENVIRONMENT: 
+    description: "Please enter the Environment[qa or dev]"
+
+  # APP_VERSION: $[[ inputs.app_version ]]
+  # BUILD_NUMBER: $[[ inputs.build_number ]]
+
+  # S3_BUCKET: "dev-test-apk-parthiban"
+  # SECRET_NAME: "ci-cd/frontend/checking"
+  # DISTRIBUTION_ID:""
+  DART_FILE: "main_prod.dart"
+  DART_FLAVOUR: "prod"
+  SONAR_HOST_URL: "https://sonarqube.trantorinc.com/"
+  SONAR_PROJECT_KEY: "visa_amigoapp_AZReV6U_Ia3N3c-LkG9G"
+  # SONAR_TOKEN: ""
+  LC_ALL: "en_US.UTF-8"
+  LANG:   "en_US.UTF-8"
+  GIT_STRATEGY: clone
+  # APPLE_ID: "parthiban.renganathan@trantorinc.com"
+  # AWS_DEFAULT_REGION: ""
+  # ROLE_ARN: "arn:aws:iam::631729407818:role/Trantor-VISA-OIDC-Git"
+
+
+#before_script: 
+    # Install AWS CLI
+#    - apt-get update && apt-get install -y curl git awscli #python3-pip   jq
+#    - pip3 install --no-cache-dir awscli --break-system-packages
+#    - git config --global --add safe.directory /builds/parrthiiban/flutter_frontend/flutter
+
+    # Establish connection with AWS to get access credentials
+    # - >
+    #   export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
+    #   $(aws sts assume-role-with-web-identity
+    #   --role-arn ${ROLE_ARN}
+    #   --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+    #   --web-identity-token ${GITLAB_OIDC_TOKEN}
+    #   --duration-seconds 3600
+    #   --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
+    #   --output text))
+    # - aws sts get-caller-identity 
+    # - curl -LO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.27.0-stable.tar.xz
+    # - tar xf flutter_linux_3.27.0-stable.tar.xz
+    # - export PATH="$PWD/flutter/bin:$PATH"
+    # - dart pub cache clean
+    # - flutter doctor-
+
+##################################
+sonarqube-analysis:
+  stage: analysis
+  image: instrumentisto/flutter:3.29
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar" 
+    GIT_DEPTH: "0" 
+    FLUTTER_ROOT: "/flutter"
+  cache:
+    key: "sonar-cache-${CI_COMMIT_REF_SLUG}"
+    paths:
+      - .sonar/cache
+    policy: pull-push
+
+  before_script: 
+    - apt-get update && apt-get install -y wget curl unzip
+    - git config --global --add safe.directory /builds/visa/amigoapp/flutter
+    # - curl -LO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.29.0-stable.tar.xz
+    # - tar xf flutter_linux_3.29.0-stable.tar.xz
+    # - export PATH="$PWD/flutter/bin:$PATH"
+    - wget -O /tmp/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.0.2.4839-linux-x64.zip
+    - unzip /tmp/sonar-scanner.zip -d /opt
+    - export PATH="/opt/sonar-scanner-7.0.2.4839-linux-x64/bin:$PATH"
+  script:
+    - flutter clean
+    - flutter pub get
+    # - sonar-scanner -Dsonar.projectKey=$SONAR_PROJECT_KEY -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.sources=lib -Dsonar.language=dart -Dsonar.exclusions=**/*.g.dart,**/*.freezed.dart -Dsonar.sourceEncoding=UTF-8 -Dsonar.coverage.exclusions=**/*_test.dart
+    - |
+       sonar-scanner
+          -Dsonar.exclusions=",,,"
+          -Dsonar.dart.analysis.reportPath="flutter_analysis.json"
+          -Dsonar.coverageReportPaths="coverage/lcov.info"
+          -Dsonar.flutter.analyzer.reportPath="flutter_analysis.json"
+          -Dsonar.verbose="true"
+    
+  allow_failure: true
+
+####################################
+build-web:
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: sts.amazonaws.com
+  stage: build
+  tags: 
+  - amigo-macos
+  # image: instrumentisto/flutter:3.29
+  before_script: 
+    - echo "Selected Environment is $ENVIRONMENT"
+    - echo $ROLE_ARN
+    - echo $SECRET_NAME
+    # - apt-get update && apt-get install -y jq unzip
+    # - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    # - unzip awscliv2.zip
+    # - sudo ./aws/install
+    # - aws --version
+    - >
+      export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
+      $(aws sts assume-role-with-web-identity
+      --role-arn ${ROLE_ARN}
+      --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+      --web-identity-token ${GITLAB_OIDC_TOKEN}
+      --duration-seconds 3600
+      --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
+      --output text))
+    - aws sts get-caller-identity
+    - git config --global --add safe.directory /builds/visa/amigoapp/flutter
+    # - curl -LO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.29.0-stable.tar.xz
+    # - tar xf flutter_linux_3.29.0-stable.tar.xz
+    # - export PATH="$PWD/flutter/bin:$PATH"
+  #  - flutter doctor
+  #  - dart pub cache clean
+    - mkdir -p config/dev config/qa config/prod
+    - aws secretsmanager get-secret-value --secret-id $SECRET_NAME --query SecretString --output text | jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' > config/dev/.env
+    - cp config/dev/.env config/prod/
+    - cp config/dev/.env config/qa/
+    # - cat config/prod/.env
+    # - cat config/dev/.env
+    # - cat config/qa/.env
+  script:
+    - flutter clean 
+    - flutter pub get
+    - flutter doctor -v
+    - dart run intl_utils:generate
+    - flutter build web -t lib/$DART_FILE --dart-define=FLAVOR=$DART_FLAVOUR
+  artifacts:
+    paths:
+      - build/web
+    expire_in: 24 hour
+  rules:
+  - if: '$ENVIRONMENT == "dev"'
+    variables:
+      ROLE_ARN: "arn:aws:iam::631729407818:role/Trantor-VISA-OIDC-Git"
+      SECRET_NAME: "ci-cd/frontend/checking"
+  - if: '$ENVIRONMENT == "qa"'
+    variables:
+      ROLE_ARN: "arn:aws:iam::522280742634:role/Trantor-VISA-OIDC-Git-QA"
+      SECRET_NAME: "qa-eva-ecs-amigo-app-secrets"
+  - when: never  # Block all other cases
+  when: manual
+
+#################################
+deploy-web:
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: sts.amazonaws.com
+  stage: deploy
+  needs: ["build-web"]
+  tags: 
+  - amigo-macos
+  before_script:
+    - echo "Selected Environment is $ENVIRONMENT"
+    - echo $ROLE_ARN
+    - echo $SECRET_NAME
+    - echo $S3_BUCKET
+    # - apt-get update && apt-get install -y awscli
+    # Establish connection with AWS
+    - >
+      export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
+      $(aws sts assume-role-with-web-identity
+      --role-arn ${ROLE_ARN}
+      --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+      --web-identity-token ${GITLAB_OIDC_TOKEN}
+      --duration-seconds 3600
+      --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
+      --output text))
+    - aws sts get-caller-identity
+  
+  script:
+    - aws s3 sync build/web s3://$S3_BUCKET --delete || exit 1
+    - echo "Deployed Successfully"
+    # To create invalidation
+    - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
+  rules:
+  - if: '$ENVIRONMENT == "dev"'
+    variables:
+      ROLE_ARN: "arn:aws:iam::631729407818:role/Trantor-VISA-OIDC-Git"
+      DISTRIBUTION_ID: "E32A560W24P5SJ"
+      S3_BUCKET: "dev-eva-buc-website-hosting" #for Live
+      # S3_BUCKET: "test-dev-website-hosting" #for Test
+  - if: '$ENVIRONMENT == "qa"'
+    variables:
+      ROLE_ARN: "arn:aws:iam::522280742634:role/Trantor-VISA-OIDC-Git-QA"
+      DISTRIBUTION_ID: "E2XYTLR5KGHZ5Z"
+      S3_BUCKET: "qa-eva-buc-website-hosting"
+      # S3_BUCKET: "test-qa-website-hosting"
+  - when: never  # Block all other cases
+  - when: manual
+
+
+#############################
+build-apk:
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: sts.amazonaws.com
+  stage: build
+  tags: 
+  - amigo-macos
+  image: instrumentisto/flutter:3.29
+  before_script: 
+    - echo "Selected Environment is $ENVIRONMENT"
+    - echo $ROLE_ARN
+    - echo $SECRET_NAME
+    # - apt-get update && apt-get install -y jq unzip
+    # - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    # - unzip awscliv2.zip
+    # - sudo ./aws/install
+    # Establish connection with AWS
+    - >
+      export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
+      $(aws sts assume-role-with-web-identity
+      --role-arn ${ROLE_ARN}
+      --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+      --web-identity-token ${GITLAB_OIDC_TOKEN}
+      --duration-seconds 3600
+      --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
+      --output text))
+   # - aws sts get-caller-identity
+    # - git config --global --add safe.directory /builds/visa/amigoapp/flutter
+    # - curl -LO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.29.0-stable.tar.xz
+    # - tar xf flutter_linux_3.29.0-stable.tar.xz
+    # - export PATH="$PWD/flutter/bin:$PATH"
+  #  - flutter doctor
+  #  - dart pub cache clean
+    - mkdir -p config/dev config/qa config/prod
+    - aws secretsmanager get-secret-value --secret-id $SECRET_NAME --query SecretString --output text | jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' > config/dev/.env
+    - cp config/dev/.env config/prod/
+    - cp config/dev/.env config/qa/
+    # - cat config/prod/.env
+    # - cat config/dev/.env
+    # - cat config/qa/.env
+  script:
+    - flutter pub get
+    - dart run intl_utils:generate
+    - flutter build apk --flavor $DART_FLAVOUR --release -t lib/$DART_FILE 
+
+  artifacts:
+    paths:
+      - build/app/outputs/flutter-apk/
+    expire_in: 1 hour
+  rules:
+  - if: '$APP_VERSION == null || $BUILD_NUMBER == null'
+    when: never # Block pipeline if variables are missing
+  - if: '$ENVIRONMENT == "dev"'
+    variables:
+      ROLE_ARN: "arn:aws:iam::631729407818:role/Trantor-VISA-OIDC-Git"
+      SECRET_NAME: "ci-cd/frontend/checking"
+  - if: '$ENVIRONMENT == "qa"'
+    variables:
+      ROLE_ARN: "arn:aws:iam::522280742634:role/Trantor-VISA-OIDC-Git-QA"
+      SECRET_NAME: "qa-eva-ecs-amigo-app-secrets"
+  - when: never  # Block all other cases
+  when: manual # Only allow manual triggers with variables
+
+
+#############################
+deploy-apk:
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: sts.amazonaws.com
+  stage: deploy
+  needs: ["build-apk"]
+  tags: 
+  - amigo-macos
+  before_script:
+    - echo "Selected Environment is $ENVIRONMENT"
+    - echo $ROLE_ARN
+    - echo $S3_BUCKET
+    # - apt-get update && apt-get install -y awscli
+    # Establish connection with AWS
+    - >
+      export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
+      $(aws sts assume-role-with-web-identity
+      --role-arn ${ROLE_ARN}
+      --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+      --web-identity-token ${GITLAB_OIDC_TOKEN}
+      --duration-seconds 3600
+      --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
+      --output text))
+    - aws sts get-caller-identity
+  
+  script:
+    - aws s3 sync  build/app/outputs/flutter-apk/ s3://$S3_BUCKET --delete || exit 1
+    - echo "Deployed Successfully"
+
+  rules:
+  - if: '$ENVIRONMENT == "dev"'
+    variables:
+      ROLE_ARN: "arn:aws:iam::631729407818:role/Trantor-VISA-OIDC-Git"
+      S3_BUCKET: "dev-test-apk-parthiban"
+  - if: '$ENVIRONMENT == "qa"'
+    variables:
+      ROLE_ARN: "arn:aws:iam::522280742634:role/Trantor-VISA-OIDC-Git-QA"
+      S3_BUCKET: "qa-test-apk-parthiban"
+  - when: never  # Block all other cases
+  when: manual # Only allow manual triggers with variables
+
+
+###########################
+
+build_ios:
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: sts.amazonaws.com
+  stage: build
+  tags:
+    - amigo-macos
+  before_script:
+    - echo $APP_VERSION
+    - echo $BUILD_NUMBER
+    - echo "Selected Environment is $ENVIRONMENT"
+    - echo $ROLE_ARN
+    - echo $SECRET_NAME
+    # Establish connection with AWS
+    - >
+      export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
+      $(aws sts assume-role-with-web-identity
+      --role-arn ${ROLE_ARN}
+      --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+      --web-identity-token ${GITLAB_OIDC_TOKEN}
+      --duration-seconds 3600
+      --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
+      --output text))
+    - mkdir -p config/dev config/qa config/prod
+    - aws secretsmanager get-secret-value --secret-id $SECRET_NAME --query SecretString --output text | jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' > config/dev/.env
+    - cp config/dev/.env config/prod/
+    - cp config/dev/.env config/qa/
+    # - cat config/prod/.env
+    # - cat config/dev/.env
+    #  - cat config/qa/.env
+    - flutter clean
+    - rm -rf ios/Pods ios/Podfile.lock ios/Runner.xcworkspace
+    - pod cache clean --all 
+    - flutter pub get
+    - flutter doctor -v
+    # - flutter pub deps
+    - dart run intl_utils:generate
+    # - echo -e "source \"https://rubygems.org\"\n\ngem \"fastlane\"" > Gemfile
+    # - gem install fastlane
+
+  script:
+    - cd ios
+    # - bundle install
+    - pod install 
+    - pod install --repo-update
+    # - bundle exec fastlane release --verbose
+    - fastlane beta
+
+  artifacts:
+    paths:
+      - ios/Runner.ipa  
+      - build/ios/ipa/  
+    expire_in: 1 week   
+  rules:
+  - if: '$APP_VERSION == null || $BUILD_NUMBER == null'
+    when: never # Block pipeline if variables are missing
+  - if: '$ENVIRONMENT == "dev"'
+    variables:
+      ROLE_ARN: "arn:aws:iam::631729407818:role/Trantor-VISA-OIDC-Git"
+      SECRET_NAME: "ci-cd/frontend/checking"
+  - if: '$ENVIRONMENT == "qa"'
+    variables:
+      ROLE_ARN: "arn:aws:iam::522280742634:role/Trantor-VISA-OIDC-Git-QA"
+      SECRET_NAME: "qa-eva-ecs-amigo-app-secrets"
+  - when: never  # Block all other cases
+  when: manual # Only allow manual triggers with variables
+
+
+##########################

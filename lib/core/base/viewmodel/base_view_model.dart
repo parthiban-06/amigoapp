@@ -1,0 +1,6 @@
+//  class BaseViewModel extends BaseProvider {
+//
+//
+//
+//
+// }

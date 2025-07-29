@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>$(APP_DISPLAY_NAME)</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>eva</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(FLUTTER_BUILD_NAME)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.visa.eva</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>https</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FirebaseAutomaticScreenReportingEnabled</key>
+	<false/>
+	<key>FlutterDeepLinkingEnabled</key>
+	<true/>
+	<key>IS_AD_PERSONALIZATION_ENABLED</key>
+    <false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>http</string>
+		<string>https</string>
+		<string>mailto</string>
+		<string>tel</string>
+		<string>sms</string>
+	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Use your Biometrics to log in faster and more securely.</string>
+	<key>NSUserNotificationUsageDescription</key>
+	<string>We need notifications to keep you updated.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This app uses tracking to provide personalized experiences and improve our services. Your data helps us deliver relevant content, enhance app functionality, and provide better user support. We respect your privacy and only use this data to improve your experience.</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+<key>UIBackgroundModes</key>
+ <array>
+ <string>fetch</string>
+  <string>remote-notification</string>
+ </array>
+	<key>UILaunchStoryboardName</key>
+	<string></string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>firebase_crashlytics_collection_enabled</key>
+	<true/>
+    <key>FirebaseAppDelegateProxyEnabled</key>
+    <false/>
+</dict>
+</plist>

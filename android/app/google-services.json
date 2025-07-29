@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "823730793969",
+    "project_id": "visaamigo-6a246",
+    "storage_bucket": "visaamigo-6a246.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823730793969:android:22b471265f24e8f0dd2850",
+        "android_client_info": {
+          "package_name": "com.visa.eva"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2hOfc3eP0rxaOUcqtXpA6yYvYtntKlvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        },
+        "analytics_service": {
+          "status": "ENABLED"
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823730793969:android:f393618e627ca317dd2850",
+        "android_client_info": {
+          "package_name": "com.visa.eva.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2hOfc3eP0rxaOUcqtXpA6yYvYtntKlvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        },
+        "analytics_service": {
+          "status": "ENABLED"
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

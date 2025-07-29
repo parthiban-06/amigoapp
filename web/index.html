@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Default language -->
+
+<head>
+    <script defer
+            src="/assets/packages/flutter_inappwebview_web/assets/web/web_support.js"
+            type="application/javascript"></script>
+    <base href="/">
+
+    <!--
+      If you are serving your web app in a path other than the root, change the
+      href value below to reflect the base path you are serving from.
+
+      The path provided below has to start and end with a slash "/" in order for
+      it to work correctly.
+
+      For more details:
+      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+      This is a placeholder for base href that will be replaced by the value of
+      the `--base-href` argument provided to `flutter build`.
+    -->
+    <base href="$FLUTTER_BASE_HREF">
+
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta content="A new Flutter project." name="description">
+
+    <!-- iOS meta tags & icons -->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="visaamigo" name="apple-mobile-web-app-title">
+    <link href="icons/Icon-192.png" rel="apple-touch-icon">
+
+    <!-- Favicon -->
+    <link href="favicon.png" rel="icon" type="image/png"/>
+
+    <title>visaamigo</title>
+    <link href="manifest.json" rel="manifest">
+
+    <script>
+        async function setLanguage() {
+            let lang = localStorage.getItem('app_language') || 'en';
+            document.documentElement.lang = lang;
+        }
+        setLanguage();
+
+        window.addEventListener('load', function() {
+            _flutter.loader.load({
+                serviceWorker: { serviceWorkerVersion: "latest" },
+                onEntrypointLoaded: function(engineInitializer) {
+                    engineInitializer.initializeEngine().then(function(appRunner) {
+                        appRunner.runApp();
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        var environment = '%ENVIRONMENT%';  // Will be replaced during build
+        // Environment specific configurations
+        window.configs = {
+          dev: {
+            apiUrl: 'https://dev-api.myapp.com'
+          },
+          prod: {
+            apiUrl: 'https://api.myapp.com'
+          }
+        };
+    </script>
+
+</head>
+<body>
+<script async src="flutter_bootstrap.js"></script>
+<script src="main.dart.js" type="application/javascript"></script>
+
+</body>
+</html>

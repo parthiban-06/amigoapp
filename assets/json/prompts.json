@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "prompt": "match_day",
+    "desc": "ticket_access"
+  },
+  {
+    "id": 2,
+    "prompt": "stay_your_way",
+    "desc": "find_hotels"
+  },
+  {
+    "id": 3,
+    "prompt": "hidden_gems",
+    "desc": "explore_off"
+  },
+  {
+    "id": 4,
+    "prompt": "exceptional_menus",
+    "desc": "dining_experience"
+  },
+  {
+    "id": 6,
+    "prompt": "must_see_attractions",
+    "desc": "highlights_you"
+  }
+]

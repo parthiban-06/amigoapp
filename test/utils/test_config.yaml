@@ -1,0 +1,26 @@
+# test/utils/test_config.yaml
+name: utils_tests
+description: Comprehensive test suite for Utils class
+
+test_groups:
+  - color_operations
+  - json_operations
+  - datetime_operations
+  - scaling_operations
+  - focus_operations
+  - string_operations
+  - biometric_operations
+  - external_operations
+  - popup_operations
+  - edge_cases
+  - performance
+
+coverage_targets:
+  line_coverage: 90%
+  function_coverage: 95%
+  branch_coverage: 85%
+
+excluded_files:
+  - '**/*.g.dart'
+  - '**/*.freezed.dart'
+  - '**/generated/**'

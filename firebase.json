@@ -1,0 +1,31 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "visaamigo-6a246",
+          "appId": "1:823730793969:android:22b471265f24e8f0dd2850",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "visaamigo-6a246",
+          "appId": "1:823730793969:ios:771c9412011a403fdd2850",
+          "uploadDebugSymbols": true,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "visaamigo-6a246",
+          "configurations": {
+            "android": "1:823730793969:android:22b471265f24e8f0dd2850",
+            "ios": "1:823730793969:ios:771c9412011a403fdd2850",
+            "web": "1:823730793969:web:1f25d295091667d7dd2850"
+          }
+        }
+      }
+    }
+  }
+}

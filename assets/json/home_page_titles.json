@@ -1,0 +1,65 @@
+[
+  {
+    "title": "FIFA WORLD CUP",
+    "type": 2,
+    "subTitle": [
+      {
+        "name": "TICKET INFO",
+        "title": "Your match ticket is waiting for you",
+        "subTitle": "Find your ticket details here."
+      },
+      {
+        "name": "BOOK TICKET",
+        "title": "Your booking",
+        "subTitle": "Book flight, hotels and more for your upcoming trip."
+      },
+      {
+        "name": "YOUR POCKET",
+        "title": "You have a pre-paid card and travel credits",
+        "subTitle": "Access your pocket to redeem."
+      }
+    ]
+  },
+  {
+    "title": "SUPERBOWL LX",
+    "type": 1,
+    "subTitle": [
+      {
+        "name": "TICKET INFO",
+        "title": "Your match ticket is waiting for you",
+        "subTitle": "Find your ticket details here."
+      },
+      {
+        "name": "BOOK TICKET",
+        "title": "Your booking",
+        "subTitle": "Book flight, hotels and more for your upcoming trip."
+      },
+      {
+        "name": "YOUR POCKET",
+        "title": "You have a pre-paid card and travel credits",
+        "subTitle": "Access your pocket to redeem."
+      }
+    ]
+  },
+  {
+    "title": "SUPERBOWL LX",
+    "type": 1,
+    "subTitle": [
+      {
+        "name": "TICKET INFO",
+        "title": "Your match ticket is waiting for you",
+        "subTitle": "Find your ticket details here."
+      },
+      {
+        "name": "BOOK TICKET",
+        "title": "Your booking",
+        "subTitle": "Book flight, hotels and more for your upcoming trip."
+      },
+      {
+        "name": "YOUR POCKET",
+        "title": "You have a pre-paid card and travel credits",
+        "subTitle": "Access your pocket to redeem."
+      }
+    ]
+  }
+]

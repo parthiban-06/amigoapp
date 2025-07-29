@@ -1,0 +1,35 @@
+# Coverage configuration for the itinerary feature
+coverage:
+  # Target coverage percentage
+  target: 80.0
+  
+  # Directories to include in coverage
+  include:
+    - lib/features/itinerary/**
+  
+  # Directories to exclude from coverage
+  exclude:
+    - lib/features/itinerary/**/*.g.dart
+    - lib/features/itinerary/**/*.freezed.dart
+    - lib/features/itinerary/**/*.mocks.dart
+    - test/**
+    - lib/generated/**
+  
+  # Test directories
+  test_dirs:
+    - test/features/itinerary/**
+  
+  # Output formats
+  output:
+    - html
+    - lcov
+    - json
+  
+  # HTML output directory
+  html_dir: coverage/html/itinerary
+  
+  # LCOV output file
+  lcov_file: coverage/itinerary_coverage.lcov
+  
+  # JSON output file
+  json_file: coverage/itinerary_coverage.json 
