@@ -26,7 +26,7 @@ permissions:
 
 jobs:
   build-apk:
-    runs-on: amigoapp
+    runs-on: home-mac-machine
     environment: ${{ inputs.environment }}
     steps:
       - name: Print Input Values
